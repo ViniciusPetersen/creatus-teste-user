@@ -35,6 +35,20 @@ exports.getUsers = async (req, res) => {
   }
 };
 
+exports.getUser = async (req, res) => {
+    try {
+      let user = await User.findById(req.params.id);
+      if (!user) {
+        return res.status(404).json({ msg: 'Usuário não encontrado' });
+      }
+  
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Erro no servidor');
+    }
+  };
+
 exports.updateUser = async (req, res) => {
   const { name, email, password, level } = req.body;
   try {
