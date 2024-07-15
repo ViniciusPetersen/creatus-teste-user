@@ -1,11 +1,9 @@
 const User = require('../models/user');
-const PDFDocument = require('pdfkit');
 const { createObjectCsvWriter } = require('csv-writer');
 const fs = require('fs');
 const path = require('path');
 
 exports.generateReport = async (req, res) => {
-  const { format } = req.query;
 
   try {
     const users = await User.find().select('-password');
